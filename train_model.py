@@ -229,14 +229,6 @@ print(train['Gender'].unique())
 train = transform_features(train)
 test = transform_features(test)
 
-train['high_bmi'] = (train['BMI'] > 0.6).astype(int)
-train['high_chol'] = (train['Cholesterol'] > 0.7).astype(int)
-train['high_trig'] = (train['Triglycerides'] > 0.7).astype(int)
-
-test['high_bmi'] = (train['BMI'] > 0.6).astype(int)
-test['high_chol'] = (train['Cholesterol'] > 0.7).astype(int)
-test['high_trig'] = (train['Triglycerides'] > 0.7).astype(int)
-
 train.nunique().sort_values()
 
 """__КОРРЕЛЯЦИЯ__
