@@ -11,26 +11,26 @@ def transform_features(df):
     #оставляем только 0 и 1 у гендера
     df['Gender'] = df['Gender'].apply(lambda x: 1 if (x == 'Male') or (x == '1.0') else 0)
 
-
-
+    #насколько активен 
     df['activity_index'] = (
         df['Exercise Hours Per Week'] *
         df['Physical Activity Days Per Week']
     )
 
-    #новый признак риск здоровья
+    #добавили риск здоровья
     df['health_risk'] = (
       df['Smoking'] +
       df['Alcohol Consumption'] +
       df['Sedentary Hours Per Day']
-  )
+    )
 
+    #потому что Pulse Pressure = Systolic blood pressure - Diastolic blood pressure
     df['pulse_pressure'] = (
     df['Systolic blood pressure'] -
     df['Diastolic blood pressure']
-)
+    )
 
-    #наши новые бинарные признаки
+    #наши новые бинарные признаки, чтобы модель лучше классифицировала группу риска 
     df['high_bmi'] = (df['BMI'] > 0.6).astype(int)
     df['high_chol'] = (df['Cholesterol'] > 0.7).astype(int)
     df['high_trig'] = (df['Triglycerides'] > 0.7).astype(int)
@@ -47,7 +47,6 @@ def transform_features(df):
         'Income',
         'Exercise Hours Per Week',
         'Physical Activity Days Per Week'
-
     ])
 
     return df
